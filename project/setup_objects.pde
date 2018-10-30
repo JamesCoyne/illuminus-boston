@@ -17,7 +17,7 @@ void setupObjects(){
   //hardcoded positions of window elements
   
   //top row
-  barriers.add(new box_barrier(0,0,145,height*4));
+  hiddenBarriers.add(new box_barrier(0,0,145,height*4));
   
   barriers.add(new box_barrier(168,201,65,110));
   barriers.add(new box_barrier(320,201,65,110));

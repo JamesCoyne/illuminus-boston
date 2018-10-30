@@ -49,10 +49,8 @@ class specialTrigger extends Barrier{
     if(frameCount > nextMove){
       if(waiting){
         this.setpos(-100,-100,0);
-        println("waiting");
       }
       else{
-        println("showing");
         nextPos();
       }
       waiting = !waiting;

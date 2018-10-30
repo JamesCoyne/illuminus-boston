@@ -19,8 +19,8 @@ int maxNote = 59;
 box_barrier bottom_wall;
 
 int gravity = -120;
-float friction = 0;
-float restitution = 0.7;
+float friction = 1;
+float restitution = 0;
 Boolean showDebug = true;
 Boolean bottom = false;
 
@@ -29,8 +29,9 @@ void setup(){
   println("setting up window");
   frameRate(40);
   app = this;
-  fullScreen(P2D);
-  //size(540,960,P2D);
+  //fullScreen(P2D);
+  //rotate(radians(-90));
+  size(540,960,P2D);
   pixelDensity(displayDensity());
   
   println("setting up box2d");
@@ -55,9 +56,9 @@ void draw(){
    squareController.trigger(trigger2);
    background(0); 
    text(mouseX*2 +"  " + mouseY*2, mouseX, mouseY);
-   //scale(0.5);
-   rotate(radians(-90));
-   translate(-width/1.8,0);
+   scale(0.5);
+   //rotate(radians(-90));
+   //translate(-width/1.8,0);
   
    
   box2d.step();
@@ -68,17 +69,19 @@ void draw(){
       specialMovie.pause();
       specialMovie = null;
     }
+    
   }
   controlMovingBarriers();
   //controlSerial();
   debugShowing();
-  
   squareController.step();
   circleController.step();
   controlBalls();
   if(keyPressed){
-    balls.add(new circleBall(mouseX, mouseY,50));
+    balls.add(new circleBall(mouseX*2, mouseY*2,50));
   }
+  for(Barrier b : displayedBarriers) b.display();
+  for(Barrier b : barriers) b.display();
 }
 
 void movieEvent(Movie m) {

@@ -1,3 +1,4 @@
+ArrayList<Barrier> hiddenBarriers = new ArrayList();
 ArrayList<Barrier> barriers = new ArrayList();
 ArrayList<Barrier> displayedBarriers = new ArrayList();
 
@@ -44,9 +45,11 @@ public class Barrier{
 
 
 class box_barrier extends Barrier{
+  float w,h;
   
   box_barrier(float x,float y, float w, float h){
-
+    this.w = w;
+    this.h = h;
     // Define the polygon
     PolygonShape sd = new PolygonShape();
     // Figure out the box2d coordinates
@@ -67,10 +70,20 @@ class box_barrier extends Barrier{
  
   
   void display(){
-    fill(50,234,2);
-    noStroke();
-    if(touching) fill(255,0,0);
-    rectMode(CENTER);
+    //fill(50,234,2);
+    //noStroke();
+    if(touching) {
+      rectMode(CENTER);
+      stroke(255);
+      strokeWeight(10);
+      noFill();
+      Vec2 pos = box2d.getBodyPixelCoord(b);
+      pushMatrix();
+      translate(pos.x, pos.y);
+      rect(0,0,w,h);
+      popMatrix();
+    }
+    
    // rect(x,y,w,h);
   }
   
@@ -97,8 +110,12 @@ class circle_barrier extends Barrier{
     noStroke();
     //stroke(255);
     //strokeWeight();
+    Vec2 pos = box2d.getBodyPixelCoord(b);
+    pushMatrix();
+    translate(pos.x, pos.y);
     if(touching) fill(255,0,0);
     ellipseMode(CENTER);
+    popMatrix();
     //ellipse(x,y,w,w);
   }
 }
